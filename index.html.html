@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background-color: rgb(0, 0, 0);
+      color: white;
+    }
+
+    /* Defina o texto em negrito para todo o corpo da página */
+    body * {
+      font-weight: bold;
+    }
+
+    /* Estilize os elementos de entrada de texto (inputs) */
+    input[type="text"] {
+      font-weight: normal; /* Retorna o texto de entrada para a formatação normal */
+    }
+  </style>
+</head>
+<body>
+  <h1>Administração das finanças</h1>
+  <a href="https://trello.com/b/DSGUrBJI/financas" target="_blank">Trello</a>
+  <table>
+    <thead>
+      <tr>
+        <th>EMPRESA</th>
+        <th>Data</th>
+        <th>PAGO</th>
+        <th>DEVE</th>
+        <th>VALOR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Repita a estrutura abaixo para cada entrada -->
+      <!-- Total de 30 linhas -->
+      <!-- Use um loop para gerar as linhas -->
+      <!-- Aqui, vou usar 3 linhas como exemplo, você pode ajustar para 30 -->
+      <script>
+        for (let i = 1; i <= 30; i++) {
+          document.write(`
+            <tr>
+              <td><input type="text" id="EMPRESA${i}" placeholder="EMPRESA"></td>
+              <td><input type="text" id="data${i}" placeholder="Data"></td>
+              <td><input type="checkbox" id="pago${i}"></td>
+              <td><input type="checkbox" id="deve${i}"></td>
+              <td><input type="text" id="valor${i}" placeholder="valor"></td>
+            </tr>
+          `);
+        }
+      </script>
+    </tbody>
+  </table>
+
+  <script>
+    // Carregar os dados do localStorage quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+      for (let i = 1; i <= 30; i++) {
+        document.getElementById(`EMPRESA${i}`).value = localStorage.getItem(`EMPRESA${i}`);
+        document.getElementById(`data${i}`).value = localStorage.getItem(`data${i}`);
+        document.getElementById(`pago${i}`).checked = localStorage.getItem(`pago${i}`) === 'true';
+        document.getElementById(`deve${i}`).checked = localStorage.getItem(`deve${i}`) === 'true';
+        document.getElementById(`valor${i}`).value = localStorage.getItem(`valor${i}`);
+      }
+    });
+
+    // Adicionar ouvintes de eventos para os campos e checkboxes
+    for (let i = 1; i <= 30; i++) {
+      document.getElementById(`EMPRESA${i}`).addEventListener('blur', function() {
+        localStorage.setItem(`EMPRESA${i}`, document.getElementById(`EMPRESA${i}`).value);
+      });
+
+      document.getElementById(`data${i}`).addEventListener('blur', function() {
+        localStorage.setItem(`data${i}`, document.getElementById(`data${i}`).value);
+      });
+
+      document.getElementById(`pago${i}`).addEventListener('change', function() {
+        localStorage.setItem(`pago${i}`, document.getElementById(`pago${i}`).checked);
+      });
+
+      document.getElementById(`deve${i}`).addEventListener('change', function() {
+        localStorage.setItem(`deve${i}`, document.getElementById(`deve${i}`).checked);
+      });
+
+      document.getElementById(`valor${i}`).addEventListener('blur', function() {
+        localStorage.setItem(`valor${i}`, document.getElementById(`valor${i}`).value);
+      });
+    }
+  </script>
+</body>
+</html>
+
+
+
+
